@@ -2,6 +2,7 @@ from flask import Flask
 from flask import jsonify
 from bs4 import BeautifulSoup
 from newspaper import Article
+import os
 
 import requests
 
