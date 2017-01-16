@@ -11,7 +11,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/news")
 def news():
 	freshNews = []
 
