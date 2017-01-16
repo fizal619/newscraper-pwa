@@ -29,13 +29,15 @@ def news():
 				article.parse()
 				freshNews.append({
 					"title": article.title,
-					"text": article.text
+					"content": article.text
 					})
 	
 
 		except Exception as e:
 			4+4
 
-	
-	
-    
+
+
+
+if __name__ == '__main__':
+    app.run()
