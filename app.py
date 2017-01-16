@@ -10,7 +10,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route("/api/fresh")
+@app.route("/")
 def news():
 	freshNews = []
 
