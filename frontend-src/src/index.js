@@ -1,6 +1,5 @@
+require("babel-polyfill");
 import { render } from 'preact';
-import "babel-polyfill";
-
 import './index.sass';
 
 let elem, App;

@@ -1,13 +1,13 @@
 {
   "private": true,
-  "name": "lennychat",
+  "name": "newscraper",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lukeed/preact-starter.git"
+    "url": "git+https://github.com/lukeed/fizal619/newscraper-pwa.git"
   },
-  "author": "Luke Edwards <luke.edwards05@gmail.com> (https://lukeed.com)",
+  "author": "Fizal Sarif (http://github.com/fizal619) (http://fizal.me)",
   "scripts": {
     "build": "rm -rf ../dist && cross-env NODE_ENV=production webpack --config config/webpack",
     "start": "serve dist -s",
@@ -16,6 +16,7 @@
   "dependencies": {
     "babel": "^6.5.2",
     "babel-polyfill": "^6.22.0",
+    "es6-promise": "^4.0.5",
     "fs": "^0.0.1-security",
     "htmltojsx": "^0.2.6",
     "md-colors": "^1.0.0",
@@ -25,7 +26,8 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-persist": "^4.1.1",
-    "redux-saga": "^0.14.3"
+    "redux-saga": "^0.14.3",
+    "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.6.1",
@@ -51,11 +53,11 @@
     "webpack-dashboard": "^0.2.1",
     "webpack-dev-server": "^2.2.0"
   },
-  "description": "> Webpack2 boilerplate for building SPA / PWA / offline front-end apps with :atom_symbol: [Preact](https://github.com/developit/preact)",
+  "description": "PWA App for my reading pleasures in the offline world of NYC subways.",
   "bugs": {
-    "url": "https://github.com/lukeed/preact-starter/issues"
+    "url": "https://github.com/fizal619/newscraper-pwa.git/issues"
   },
-  "homepage": "https://github.com/lukeed/preact-starter#readme",
+  "homepage": "https://github.com/fizal619/newscraper-pwa.git#readme",
   "main": "index.js",
   "keywords": []
 }
