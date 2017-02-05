@@ -26,7 +26,9 @@ const store = createStore(
   )
 
 sagaMiddleware.run(rootSaga)
-persistStore(store)
+persistStore(store, {
+  whitelist: ['news']
+})
 
 
 // track pages on route change

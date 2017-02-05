@@ -21,12 +21,11 @@ const mapDispatchToProps = dispatch =>({
 const Home =  ({ui,news,load}) => {
   // console.log(ui,news)
 
-	if(ui.loading || news.length === 0){
+	if(ui.loading){
     return (
       <div className="page page__home">
         <Card>
-          <h3>Loading...</h3>
-          <Button callback={load} name="Refresh" />
+          <img className="loader" src="/img/loader.gif" alt="loading" />
         </Card>
       </div>
       )
