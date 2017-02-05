@@ -1,4 +1,4 @@
-const { join } = require('path');
+const { join, resolve } = require('path');
 const ExtractText = require('extract-text-webpack-plugin');
 const { isProd, plugins } = require('./setup');
 const babel = require('./babel');
@@ -28,7 +28,11 @@ module.exports = {
 			test: /\.jsx?$/,
 			exclude: exclude,
 			loader: 'babel-loader',
-			options: babel
+			options: babel,
+			include: [
+   	 		resolve('src'),
+    		resolve('node_modules/preact-compat/src')
+ 		 	]
 		}, {
 			test: /\.(sass|scss)$/,
 			loader: isProd ? ExtractText.extract({

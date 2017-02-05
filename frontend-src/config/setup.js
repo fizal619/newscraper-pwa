@@ -35,7 +35,6 @@ const plugins = [
 if (isProd) {
 	plugins.push(
 		new webpack.LoaderOptionsPlugin({minimize: true, debug: false}),
-		new webpack.optimize.UglifyJsPlugin(uglify),
 		new ExtractText('styles.[hash].css'),
 		new SWPrecache({
 			filename: 'service-worker.js',

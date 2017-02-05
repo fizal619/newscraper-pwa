@@ -22,19 +22,17 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-
-
 @app.route("/news")
 def news():
   freshNews = []
   source = request.args.get('s')
-  r  = requests.get("https://newsapi.org/v1/articles?source="+source+"&sortBy=latest&apiKey=510615b5cca64c818fd652cc1888d2af")
+  r  = requests.get("https://newsapi.org/v1/articles?source="+source+"&sortBy=latest&apiKey="+os.environ.get('NEWSAPI_KEY'))
   data = r.json()
   for article in data["articles"]:
     url = 'https://mercury.postlight.com/parser?url='+article["url"]
     headers = {
       "Content-Type": "application/json",
-      "x-api-key": "VmRQqLIvvFJXFPgsUTMkGqmVEO9li8xf0VJk5lRM"
+      "x-api-key": os.environ.get('MERCURY_KEY')
       }
     r = requests.get(url,headers=headers)
     mercury = r.json()
@@ -42,6 +40,12 @@ def news():
 
   return jsonify(data["articles"])
 
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return 'You want path: %s' % path
 
 
 if __name__ == '__main__':

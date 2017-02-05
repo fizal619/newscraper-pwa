@@ -26,6 +26,7 @@ const Home =  ({ui,news,load}) => {
       <div className="page page__home">
         <Card>
           <h3>Loading...</h3>
+          <Button callback={load} name="Refresh" />
         </Card>
       </div>
       )
@@ -43,10 +44,7 @@ const Home =  ({ui,news,load}) => {
               )
           })}
           <br />
-  				<Button 
-            callback={load} 
-            name="Refresh" 
-          />
+  				<Button callback={load} name="Refresh" />
           <br />
   			</Card>
   		</div>

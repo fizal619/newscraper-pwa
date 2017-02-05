@@ -15,7 +15,7 @@ export function* loadNews() {
   // dispatch({type:'LOADING'})
   console.log('got it')
   yield put({type: 'LOADING'})
-  const data = yield call(fetch,'http://localhost:5000/?s=techcrunch')
+  const data = yield call(fetch,'/?s=techcrunch')
   const articles = yield data.json()
   console.log(articles)
   yield put({type: 'LOADED', articles:articles})
