@@ -3,21 +3,9 @@ from flask import jsonify
 from flask_cors import CORS, cross_origin
 from time import sleep
 
-# from flask import json
-from bs4 import BeautifulSoup
-from newspaper import Article
-
 import os
 import requests
 
-# url = 'https://mercury.postlight.com/parser?url='+link.get('href')
-#         print(url)
-#         headers = {
-#           "Content-Type": "application/json",
-#           "x-api-key": "VmRQqLIvvFJXFPgsUTMkGqmVEO9li8xf0VJk5lRM"
-#         }
-#         r = requests.get(url,headers=headers)
-# HN=newspaper.build('https://news.ycombinator.com/')
 
 app = Flask(__name__, static_folder='dist', static_url_path='')
 CORS(app)
