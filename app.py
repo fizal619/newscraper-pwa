@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import request
+from flask import Flask, request, send_from_directory
 from flask import jsonify
 from flask_cors import CORS, cross_origin
 
@@ -19,7 +18,7 @@ import requests
 #         r = requests.get(url,headers=headers)
 # HN=newspaper.build('https://news.ycombinator.com/')
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='dist', static_url_path='')
 CORS(app)
 
 @app.route("/news")
@@ -42,10 +41,9 @@ def news():
 
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return 'You want path: %s' % path
+@app.errorhandler(404)
+def catchall(path):
+    return send_from_directory('dist', 'index.html')
 
 
 if __name__ == '__main__':
