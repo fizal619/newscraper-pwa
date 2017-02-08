@@ -26,7 +26,10 @@ Progressive Web App for reading fresh news offline in the **subway** from variou
 
 #### Deploying
   
-  - Run `npm run build` in the `frontend-src` folder, this will spit out the production frontend in `dist` either for the python app to serve, or for you to serve on static hosting.
+  - Run `npm run build` in the `frontend-src` folder, this will spit out the production frontend in `dist` either for the python app to serve, or for you to serve on static hosting. 
+  - Heroku friendly with that dank Procfile!
+  - Remember to restrict your origins so people like me don't use your site's api for their own malicious purposes.( ͡° ͜ʖ ͡°) 
+ 
 
 
 ## TODO
