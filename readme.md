@@ -1,6 +1,8 @@
 # NewScraper
 
-Progressive Web App for reading fresh news offline in the **subway** from various (right now only HackerNews) news sources. 
+![screen](screenshot.png)
+
+Progressive Web App for reading fresh news offline in the **subway** from various (right now only HackerNews) news sources. Open [NewScraper](http://newscraper-pwa.herokuapp.com/) on your phone and add it to your homescreen to see the magic!
 
 ## Tech Stack structure
 
