@@ -16,7 +16,7 @@ export function* helloSaga() {
 export async function fetchNews(){
   console.log('in fetch');
   let returnData;
-  await fetch('/news?s=techcrunch').then(r=>r.json()).then(data=> returnData = data);
+  await fetch('https://newscraper-pwa.herokuapp.com/news?s=techcrunch').then(r=>r.json()).then(data=> returnData = data);
   console.log(returnData);
   return returnData;
 }

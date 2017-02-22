@@ -25,6 +25,8 @@ const Home =  ({ui,news,load}) => {
     return (
       <div className="page page__home">
         <Card>
+          <br/>
+          <center><h3>This takes a bit, hold onto your socks ( ͡° ͜ʖ ͡°)</h3></center>
           <img className="loader" src="/img/loader.gif" alt="loading" />
         </Card>
       </div>
