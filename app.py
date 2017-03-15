@@ -1,7 +1,7 @@
 from flask import Flask, request, send_from_directory
 from flask import jsonify
 from flask_cors import CORS, cross_origin
-from time import sleep
+from time import sleep, time
 
 import os
 import requests
@@ -10,11 +10,14 @@ import requests
 app = Flask(__name__, static_folder='dist', static_url_path='')
 CORS(app)
 
+
 @app.route("/news")
 def news():
   print('>>>>>>>>>>>>>>>HIT')
-  freshNews = []
   source = request.args.get('s')
+  
+  sleep(1)
+  freshNews = []
   r  = requests.get("https://newsapi.org/v1/articles?source="+source+"&sortBy=latest&apiKey="+os.environ.get('NEWSAPI_KEY'))
   data = r.json()
   for article in data["articles"]:
@@ -26,7 +29,7 @@ def news():
     r = requests.get(url,headers=headers)
     mercury = r.json()
     article["content"] = mercury["content"]
-    sleep(0.5)
+    sleep(0.1)
 
   return jsonify(data["articles"])
 
