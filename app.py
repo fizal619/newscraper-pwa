@@ -21,8 +21,8 @@ def news():
   source = request.args.get('s')
   
   #caching, not the most self explanatory thing 
-  if(source in cache["sources"] and time() - cache["articles"][source]["time"] < 3600  ):
-    return cache["articles"][source]["data"]
+  if(source in cache["sources"] and time() - cache["articles"][source]["time"] < 1800  ):
+    return jsonify(cache["articles"][source]["data"])
 
   sleep(1)
   freshNews = []
