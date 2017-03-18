@@ -24,28 +24,34 @@ def news():
   if(source in cache["sources"] and time() - cache["articles"][source]["time"] < 1800  ):
     return jsonify(cache["articles"][source]["data"])
 
-  sleep(1)
-  freshNews = []
-  r  = requests.get("https://newsapi.org/v1/articles?source="+source+"&sortBy=latest&apiKey="+os.environ.get('NEWSAPI_KEY'))
-  data = r.json()
-  for article in data["articles"]:
-    url = 'https://mercury.postlight.com/parser?url='+article["url"]
-    headers = {
-      "Content-Type": "application/json",
-      "x-api-key": os.environ.get('MERCURY_KEY')
+  try:
+      freshNews = []
+      r  = requests.get("https://newsapi.org/v1/articles?source="+source+"&sortBy=latest&apiKey="+os.environ.get('NEWSAPI_KEY'))
+      data = r.json()
+      for article in data["articles"]:
+        url = 'https://mercury.postlight.com/parser?url='+article["url"]
+        headers = {
+          "Content-Type": "application/json",
+          "x-api-key": os.environ.get('MERCURY_KEY')
+          }
+        r = requests.get(url,headers=headers)
+        mercury = r.json()
+        article["content"] = mercury["content"]
+        sleep(0.1)
+
+      cache["sources"].append(source)
+      cache["articles"][source] = {
+        "data": data["articles"],
+        "time": time()
       }
-    r = requests.get(url,headers=headers)
-    mercury = r.json()
-    article["content"] = mercury["content"]
-    sleep(0.1)
 
-  cache["sources"].append(source)
-  cache["articles"][source] = {
-    "data": data["articles"],
-    "time": time()
-  }
-
-  return jsonify(data["articles"])
+      return jsonify(data["articles"])
+    
+  except Exception as e:
+      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.')
+      print(e)
+      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.')
+      return jsonify([])
 
 
 
