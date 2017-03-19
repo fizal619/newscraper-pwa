@@ -1,45 +1,65 @@
-from flask import Flask
+from flask import Flask, request, send_from_directory
 from flask import jsonify
-from bs4 import BeautifulSoup
-from newspaper import Article
+from flask_cors import CORS, cross_origin
+from time import sleep, time
 
 import os
 import requests
 
 
-# HN=newspaper.build('https://news.ycombinator.com/')
+app = Flask(__name__, static_folder='dist', static_url_path='')
+CORS(app)
 
-app = Flask(__name__)
+cache = {
+  "articles": {},
+  "sources": []
+}
 
 @app.route("/news")
 def news():
-	freshNews = []
+  print('>>>>>>>>>>>>>>>HIT')
+  source = request.args.get('s')
+  
+  #caching, not the most self explanatory thing 
+  if(source in cache["sources"] and time() - cache["articles"][source]["time"] < 1800  ):
+    return jsonify(cache["articles"][source]["data"])
 
-	r  = requests.get("https://news.ycombinator.com/")
-	data = r.text
-	soup = BeautifulSoup(data)
+  try:
+      freshNews = []
+      r  = requests.get("https://newsapi.org/v1/articles?source="+source+"&sortBy=latest&apiKey="+os.environ.get('NEWSAPI_KEY'))
+      data = r.json()
+      for article in data["articles"]:
+        url = 'https://mercury.postlight.com/parser?url='+article["url"]
+        headers = {
+          "Content-Type": "application/json",
+          "x-api-key": os.environ.get('MERCURY_KEY')
+          }
+        r = requests.get(url,headers=headers)
+        mercury = r.json()
+        article["content"] = mercury["content"]
+        sleep(0.1)
 
-	for link in soup.find_all('a'):
-		if len(freshNews) == 20:
-			return jsonify(freshNews)
-		try:
-			if "storylink" in link.get("class"):
-				# print(link.get("class"))
-				article = Article(link.get("href"))
-				article.download()
-				article.parse()
-				freshNews.append({
-					"title": article.title,
-					"content": article.text
-					})
-	
+      cache["sources"].append(source)
+      cache["articles"][source] = {
+        "data": data["articles"],
+        "time": time()
+      }
 
-		except Exception as e:
-			4+4
+      return jsonify(data["articles"])
+    
+  except Exception as e:
+      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.')
+      print(e)
+      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.')
+      return jsonify([])
 
 
+
+@app.errorhandler(404)
+def catchall(path):
+    return send_from_directory('dist', 'index.html')
 
 
 if __name__ == '__main__':
-	port = int(os.environ.get('PORT', 5000))
-	app.run(host='0.0.0.0', port=port)
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port)
