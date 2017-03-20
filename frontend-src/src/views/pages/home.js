@@ -34,20 +34,29 @@ const Home =  ({ui,news,load}) => {
   }else{
     return (
   		<div className="page page__home">
-  			<Card>
-  				<h2>Latest News</h2>
-          <br />
-          {news.map((article,index)=>{
-            return(
-              <CardLink href={ `/article/${index}`}>
-                <strong>{article.title}</strong>
-              </CardLink>
-              )
+        <h2>Latest News</h2><br/>
+        {news.map((article,index)=>{
+
+          //only return lengthy things, helps filter out weird stuff from hacker news
+          if (article.content.length < 1000) return null
+          
+          return(
+            <CardLink href={ `/article/${index}`}>
+              <h3>{article.title}</h3>
+              <br />
+              {article.urlToImage ?
+                <img src={"https://api.rethumb.com/v1/square/200/"+article.urlToImage} />
+              :
+                <img src="/img/na.jpg" />
+              }
+              <p>{article.description}</p>
+  
+            </CardLink>
+            )
           })}
           <br />
-  				<Button callback={load} name="Refresh" />
+          <Button callback={load} name="Refresh" />
           <br />
-  			</Card>
   		</div>
   	)
   }

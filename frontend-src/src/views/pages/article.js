@@ -10,14 +10,16 @@ const mapStateToProps = state =>({
 
 const Article = ({id, article}) => { // <---- (props)
 	// console.log(article)
-	//TODO: redirect to home if  
+	// TODO: make this work with router
+	if(!article[id]) location='/' 
+
+	//move the view up to deal with that bug
+	window.scrollTo(0,0)
+	
 	return (
 		<div className="page page__article">
-			<Card>
 				<h1>{article[id].title}</h1>
 				<div dangerouslySetInnerHTML={{__html: article[id].content }}></div>
-				
-			</Card>
 		</div>
 	);
 }
