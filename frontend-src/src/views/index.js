@@ -4,6 +4,7 @@ import { Router } from 'preact-router';
 import Home from './pages/home';
 import Layout from './tags/layout';
 import Article from './pages/article';
+import Settings from './pages/settings';
 import Error404 from './pages/errors/404';
 import Credit from './pages/credit';
 import Blog from './pages/blog';
@@ -38,8 +39,9 @@ export default (
   <Provider store={store}>
 	<Layout>
 		<Router onChange={ onChange }>
+      <Article path="/article/:id" />
+      <Settings path="/settings" />
 			<Home path="/" />
-			<Article path="/article/:id" />
 			<Error404 default />
 		</Router>
 	</Layout>

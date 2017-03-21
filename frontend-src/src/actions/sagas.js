@@ -8,34 +8,51 @@ import {
 
 //BAD SCOPING IDK. TODO OPTIMIZE
 let articles = []
+let sources = []
 
 export function* helloSaga() {
   console.log('Hello Sagas!');
 }
 
+
+export async function fetchSources(){
+  console.log('in fetch sources');
+  let returnData;
+  await fetch('https://newsapi.org/v1/sources?language=en&country=us').then(r=>r.json()).then(data=> returnData = data);
+  console.log(returnData);
+  return returnData.sources;
+}
+
 export async function fetchNews(source){
-  console.log('in fetch');
+  console.log('in fetch', source);
   let returnData;
   await fetch('https://newscraper-pwa.herokuapp.com/news?s='+source).then(r=>r.json()).then(data=> returnData = data);
   console.log(returnData);
   return returnData;
 }
 
-export function* loadNews() {  
-  console.log('got it');
+export function* loadSources() {
+  console.log('in the saga for loading news');
+  // yield put({type: 'LOADING'})
+  try { 
+    sources = yield fetchSources();
+    yield put({ type: 'LOAD REMOTE SOURCES', remoteSources: sources})
+  }catch(e){
+    console.log(e)
+  }
+}
+
+export function* loadNews(userSources) {  
+  console.log('got it', userSources);
   yield put({type: 'LOADING'});
   try{
-    // const data = yield call(fetch,'http://localhost:5000/news?s=techcrunch')
-    // const articles = yield data.json()
-    // console.log(articles)
-    console.log('this far');
+    // console.log('this far');
     articles = []
-    articles = articles.concat(yield fetchNews('hacker-news'));
-    articles = articles.concat(yield fetchNews('ars-technica'));
-    articles = articles.concat(yield fetchNews('techcrunch'));
-    articles = articles.concat(yield fetchNews('engadget'));
-    console.log('this far 2');
-    console.log(articles);
+    for (var i = userSources.sources.length - 1; i >= 0; i--) {
+      articles = articles.concat(yield fetchNews(userSources.sources[i]));
+    }
+    // console.log('this far 2');
+    // console.log(articles);
     yield put({type: 'LOADED', articles});
     yield put({type: 'NOT_LOADING'});
   } catch(e){
@@ -47,6 +64,7 @@ export function* loadNews() {
 
 export function* watchLoadNews(){
   yield takeEvery('LOAD', loadNews);
+  yield takeEvery('LOAD SOURCES', loadSources);
 }
 
 export default function* rootSaga() {

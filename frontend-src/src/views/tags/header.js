@@ -7,6 +7,7 @@ export default function () {
 			<h1>NewScraper 2.0</h1>
 			<nav>
 				<Link href="/">Home</Link>
+				<Link href="/settings">Settings</Link>
 			</nav>
 		</header>
 	)

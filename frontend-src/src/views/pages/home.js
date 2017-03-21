@@ -7,18 +7,19 @@ import {connect} from 'react-redux'
 
 const mapStateToProps = state =>({
   news: state.news.articles,
+  sources: state.news.sources,
   ui: state.ui  
 })
 
 const mapDispatchToProps = dispatch =>({
-  load: ()=> {
+  load: (sources)=> {
     console.log('map state')
-    dispatch({type: 'LOAD'})
+    dispatch({type: 'LOAD', sources})
   }
 })
 
 
-const Home =  ({ui,news,load}) => {
+const Home =  ({ui,news, sources, load}) => {
   // console.log(ui,news)
 
 	if(ui.loading){
@@ -55,7 +56,7 @@ const Home =  ({ui,news,load}) => {
             )
           })}
           <br />
-          <Button callback={load} name="Refresh" />
+          <Button callback={()=>load(sources)} name="Refresh" />
           <br />
   		</div>
   	)
