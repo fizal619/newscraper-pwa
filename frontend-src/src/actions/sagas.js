@@ -9,6 +9,7 @@ import {
 //BAD SCOPING IDK. TODO OPTIMIZE
 let articles = []
 let sources = []
+let userSources = []
 
 export function* helloSaga() {
   console.log('Hello Sagas!');
@@ -24,7 +25,7 @@ export async function fetchSources(){
 }
 
 export async function fetchNews(source){
-  console.log('in fetch', source);
+  console.log('in fetch');
   let returnData;
   await fetch('https://newscraper-pwa.herokuapp.com/news?s='+source).then(r=>r.json()).then(data=> returnData = data);
   console.log(returnData);
@@ -42,17 +43,18 @@ export function* loadSources() {
   }
 }
 
-export function* loadNews(userSources) {  
-  console.log('got it', userSources);
+export function* loadNews(action) {  
+  console.log('got it');
   yield put({type: 'LOADING'});
   try{
     // console.log('this far');
     articles = []
-    for (var i = userSources.sources.length - 1; i >= 0; i--) {
-      articles = articles.concat(yield fetchNews(userSources.sources[i]));
-    }
-    // console.log('this far 2');
+    userSources = [].concat(action.sources);
     // console.log(articles);
+    while (userSources.length > 0 ){
+      articles = articles.concat(yield fetchNews(userSources.pop()))
+    }
+
     yield put({type: 'LOADED', articles});
     yield put({type: 'NOT_LOADING'});
   } catch(e){
@@ -63,8 +65,8 @@ export function* loadNews(userSources) {
 }
 
 export function* watchLoadNews(){
-  yield takeEvery('LOAD', loadNews);
-  yield takeEvery('LOAD SOURCES', loadSources);
+  yield takeLatest('LOAD', loadNews);
+  yield takeLatest('LOAD SOURCES', loadSources);
 }
 
 export default function* rootSaga() {
