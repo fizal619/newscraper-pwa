@@ -43,20 +43,22 @@ const Home =  ({ui,news, sources, load}) => {
           
           return(
             <CardLink href={ `/article/${index}`}>
-              <h3>{article.title}</h3>
-              <br />
               {article.urlToImage ?
                 <img src={"https://api.rethumb.com/v1/square/200/"+article.urlToImage} />
               :
                 <img src="/img/na.jpg" />
               }
+              <h3>{article.title}</h3>
+              <br />
               <p>{article.description}</p>
   
             </CardLink>
             )
           })}
           <br />
-          <Button callback={()=>load(sources)} name="Refresh" />
+          <div onClick={()=>load(sources)} class="refresh-background"> 
+            <i class="refresh material-icons nav-icon md-36">refresh</i>
+          </div>
           <br />
   		</div>
   	)
