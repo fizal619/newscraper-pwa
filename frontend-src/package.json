@@ -5,12 +5,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lukeed/fizal619/newscraper-pwa.git"
+    "url": "git+https://github.com/fizal619/newscraper-pwa.git"
   },
   "author": "Fizal Sarif (http://github.com/fizal619) (http://fizal.me)",
   "scripts": {
     "build": "rm -rf ../dist && cross-env NODE_ENV=production webpack --config config/webpack",
-    "deploy": "npm run build && cd .. && git push heroku master && cd dist/ && cp index.html 200.html && surge -d newscraper.surge.sh -p . && rm -rf * ",
+    "deploy": "npm run build && cd .. && git push heroku master && cd dist/ && cp index.html 200.html && surge -d https://newscraper.surge.sh -p . && rm -rf * ",
     "start": "serve dist -s",
     "watch": "webpack-dashboard -- webpack-dev-server --config config/webpack"
   },

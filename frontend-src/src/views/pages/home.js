@@ -25,11 +25,11 @@ const Home =  ({ui,news, sources, load}) => {
 	if(ui.loading){
     return (
       <div className="page page__home">
-        <Card>
+        <div className="loader-container">
           <br/>
-          <center><h3>This takes a bit, hold onto your socks <br/>( ͡° ͜ʖ ͡°)</h3></center>
+          <center><h2>This takes a bit, hold onto your socks <br/>( ͡° ͜ʖ ͡°)</h2></center>
           <img className="loader" src="/img/loader.gif" alt="loading" />
-        </Card>
+        </div>
       </div>
       )
   }else{
@@ -43,14 +43,15 @@ const Home =  ({ui,news, sources, load}) => {
           
           return(
             <CardLink href={ `/article/${index}`}>
+              <div className="content">
+                <h4>{article.title}</h4>
+                <p>{article.description.slice(0,50)+"..."}</p>
+              </div>
               {article.urlToImage ?
                 <img src={"https://api.rethumb.com/v1/square/200/"+article.urlToImage} />
               :
                 <img src="/img/na.jpg" />
               }
-              <h3>{article.title}</h3>
-              <br />
-              <p>{article.description}</p>
   
             </CardLink>
             )

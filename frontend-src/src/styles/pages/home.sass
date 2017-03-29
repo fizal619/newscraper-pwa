@@ -6,11 +6,15 @@
 	ul
 		padding-left: 2 * $base-spacing
 	
-	h3,p 
-		width: 68%
-	
+	.content
+		display: block
+		width: 57%
+		margin-top: 10px
+
 	.card
 		min-height: 110px
+		display: flex
+		justify-content: space-between
 
 	.refresh-background
 		background-color: red
@@ -20,26 +24,34 @@
 		position: fixed
 		bottom: 5%
 		right: 5%
+		cursor: pointer
 		.refresh
 			line-height: 50px
 			color: white
+			// padding: 14px
 			transform: translateX(12.5px)
+	
+		
+			
 
 
 	img 
-		width: 30%
-		height: 100px
+		width: 40%
+		max-height: 110px
+		border-radius: 5px
 		// float: right
-		right: 1%
-		top: 1%
-		position: absolute
+		// right: 1%
+		// top: 1%
+		// position: absolute
 		object-fit: cover
 		display: block
 		margin: $base-unit auto
 		max-width: 60 * $base-spacing // 960
    
 
-img.loader
-  width: 100px
-  height: auto
-  margin: 20vh auto
+	img.loader
+	  width: 100px
+	  height: auto
+	  display: block
+	  margin: 10vh auto
+	  position: relative
