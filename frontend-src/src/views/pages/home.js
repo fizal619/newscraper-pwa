@@ -48,7 +48,7 @@ const Home =  ({ui,news, sources, load}) => {
         {news.map((article,index)=>{
 
           //only return lengthy things, helps filter out weird stuff from hacker news
-          if (article.content.length < 1000) return null
+          // if (article.content.length < 500) return null
           
           return(
             <CardLink href={ `/article/${index}`}>
