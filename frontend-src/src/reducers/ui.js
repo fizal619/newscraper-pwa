@@ -1,5 +1,5 @@
 const initialState = {
-  loading: true
+  loading: false
 }
 
 export default (state = initialState, action) => {
