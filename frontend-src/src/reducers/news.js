@@ -1,8 +1,5 @@
 const initialState = {
-  articles: [{
-    title: 'Hit Refresh for the latest headlines from TechCrunch',
-    content: 'Woah! Go back and hit refresh you doof.'
-  }], 
+  articles: [], 
   sources: [],
   remoteSources: []
 }

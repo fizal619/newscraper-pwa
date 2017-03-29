@@ -35,7 +35,16 @@ const Home =  ({ui,news, sources, load}) => {
   }else{
     return (
   		<div className="page page__home">
-        <h2>Latest News</h2><br/>
+        {news.length == 0 ? 
+          <div>
+            <h2>Hey! Welcome to my app! <br/></h2>
+            <p> <b>Newscraper</b> is a fairly simple app for reading news from some popular news sources offline.</p>
+            <p>You should add it to your homescreen for the best experience!</p>
+            <p><b>Hit the gear on the upper right to pick your favorite sources then come back here and hit refresh.</b></p>
+          </div>
+          :
+          <h2>Latest News <br/></h2>
+        }
         {news.map((article,index)=>{
 
           //only return lengthy things, helps filter out weird stuff from hacker news
@@ -44,14 +53,14 @@ const Home =  ({ui,news, sources, load}) => {
           return(
             <CardLink href={ `/article/${index}`}>
               <div className="content">
-                <h4>{article.title}</h4>
-                <p>{article.description.slice(0,50)+"..."}</p>
+                <h3>{article.title}</h3>
+                {article.urlToImage ?
+                  <img src={"https://api.rethumb.com/v1/square/300/"+article.urlToImage} />
+                :
+                  <img src="/img/na.jpg" />
+                }
+                <p>{article.description}</p>
               </div>
-              {article.urlToImage ?
-                <img src={"https://api.rethumb.com/v1/square/200/"+article.urlToImage} />
-              :
-                <img src="/img/na.jpg" />
-              }
   
             </CardLink>
             )
