@@ -37,7 +37,7 @@ const Settings = ({addSource, removeSource, loadSources, sources, remoteSources}
 		<div className="page page__settings">
 			<div class="logo-container">
 				{remoteSources.map(item=>
-					sources.indexOf(item.id) >= 0 ? <img onClick={()=>removeSource(item.id)} class="logo glow" src={item.urlsToLogos.small} /> : <img onClick={()=>addSource(item.id)} class="logo" src={item.urlsToLogos.small} />
+					sources.indexOf(item.id) >= 0 ? <img onClick={()=>removeSource(item.id)} class="logo glow" src={"//logo.clearbit.com/"+item.url.split("/")[2]} /> : <img onClick={()=>addSource(item.id)} class="logo" src={"//logo.clearbit.com/"+item.url.split("/")[2]} />
 				)}
 			</div>
 		</div>
