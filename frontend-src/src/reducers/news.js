@@ -1,5 +1,5 @@
 const initialState = {
-  articles: [], 
+  articles: [],
   sources: [],
   remoteSources: []
 }
@@ -11,16 +11,21 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case 'LOADED':
+      let newArticles = action.articles.sort((a,b)=>{
+        if (new Date(a.publishedAt) < new Date(b.publishedAt)) return 1
+        if (new Date(a.publishedAt) > new Date(b.publishedAt)) return -1
+        return 0
+      })
       console.log('LOADED NEWS')
       return Object.assign({}, state,{
-        articles: action.articles
+        articles: newArticles
       })
 
     case 'CLEAR':
       return {
         articles: []
       }
-    
+
     case 'ADD SOURCE':
       sources = state.sources.concat([action.source])
       console.log('added source', sources)

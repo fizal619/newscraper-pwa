@@ -27,7 +27,7 @@ export async function fetchSources(){
 export async function fetchNews(source){
   console.log('in fetch');
   let returnData;
-  await fetch('https://newscraper-pwa.herokuapp.com/news?s='+source).then(r=>r.json()).then(data=> returnData = data);
+  await fetch('http://localhost:5000/news?s='+source).then(r=>r.json()).then(data=> returnData = data);
   console.log(returnData);
   return returnData;
 }
@@ -35,7 +35,7 @@ export async function fetchNews(source){
 export function* loadSources() {
   console.log('in the saga for loading news');
   // yield put({type: 'LOADING'})
-  try { 
+  try {
     sources = yield fetchSources();
     yield put({ type: 'LOAD REMOTE SOURCES', remoteSources: sources})
   }catch(e){
@@ -43,7 +43,7 @@ export function* loadSources() {
   }
 }
 
-export function* loadNews(action) {  
+export function* loadNews(action) {
   console.log('got it');
   yield put({type: 'LOADING'});
   try{
@@ -75,4 +75,3 @@ export default function* rootSaga() {
     watchLoadNews()
   ]
 }
-

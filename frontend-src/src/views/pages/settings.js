@@ -28,16 +28,31 @@ const mapDispatchToProps = dispatch =>({
 // })
 // categories = Object.keys(categories)
 
-const Settings = ({addSource, removeSource, loadSources, sources, remoteSources}) => { // <---- (props)	
-	
+const Settings = ({addSource, removeSource, loadSources, sources, remoteSources}) => { // <---- (props)
+
 	let checkButton;
 	remoteSources.length == 0 ? loadSources() : checkButton = true;
-	
+
+  const imgError = e =>{
+    e.target.style.display = "none"
+  }
+
 	return (
 		<div className="page page__settings">
 			<div class="logo-container">
+
 				{remoteSources.map(item=>
-					sources.indexOf(item.id) >= 0 ? <img onClick={()=>removeSource(item.id)} class="logo glow" src={"//logo.clearbit.com/"+item.url.split("/")[2]} /> : <img onClick={()=>addSource(item.id)} class="logo" src={"//logo.clearbit.com/"+item.url.split("/")[2]} />
+					sources.indexOf(item.id) >= 0 ?
+          <img onClick={()=>removeSource(item.id)}
+            class="logo glow"
+            onError={imgError}
+            src={"//logo.clearbit.com/"+item.url.split("/")[2]} />
+          :
+          <img
+            onClick={()=>addSource(item.id)}
+            class="logo"
+            onError={imgError}
+            src={"//logo.clearbit.com/"+item.url.split("/")[2]} />
 				)}
 			</div>
 		</div>

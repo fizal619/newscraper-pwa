@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 const mapStateToProps = state =>({
   news: state.news.articles,
   sources: state.news.sources,
-  ui: state.ui  
+  ui: state.ui
 })
 
 const mapDispatchToProps = dispatch =>({
@@ -21,7 +21,9 @@ const mapDispatchToProps = dispatch =>({
 
 const Home =  ({ui,news, sources, load}) => {
   // console.log(ui,news)
-
+  const imgError = e =>{
+    e.target.style.display = "none"
+  }
 	if(ui.loading){
     return (
       <div className="page page__home">
@@ -35,7 +37,7 @@ const Home =  ({ui,news, sources, load}) => {
   }else{
     return (
   		<div className="page page__home">
-        {news.length == 0 ? 
+        {news.length == 0 ?
           <div>
             <h2>Hey! Welcome to my app! <br/></h2>
             <p> <b>Newscraper</b> is a fairly simple app for reading news from some popular news sources offline.</p>
@@ -49,24 +51,32 @@ const Home =  ({ui,news, sources, load}) => {
 
           //only return lengthy things, helps filter out weird stuff from hacker news
           // if (article.content.length < 500) return null
-          
+
           return(
             <CardLink href={ `/article/${index}`}>
               <div className="content">
+                <img
+                  class="logo"
+                  onError={imgError}
+                  src={"//logo.clearbit.com/"+article.url.split("/")[2]}
+                />
                 <h3>{article.title}</h3>
                 {article.urlToImage ?
-                  <img src={"https://api.rethumb.com/v1/square/300/"+article.urlToImage} />
+                  <img
+                  onError={e=>e.target.src = "/img/na.jpg"} 
+                  src={"https://api.rethumb.com/v1/square/300/"+article.urlToImage} />
                 :
                   <img src="/img/na.jpg" />
                 }
                 <p>{article.description}</p>
+                <p className="small">{new Date(article.publishedAt).toDateString()}</p>
               </div>
-  
+
             </CardLink>
             )
           })}
           <br />
-          <div onClick={()=>load(sources)} class="refresh-background"> 
+          <div onClick={()=>load(sources)} class="refresh-background">
             <i class="refresh material-icons nav-icon md-36">refresh</i>
           </div>
           <br />

@@ -19,14 +19,14 @@ cache = {
 def news():
   print('>>>>>>>>>>>>>>>HIT')
   source = request.args.get('s')
-  
-  #caching, not the most self explanatory thing 
+
+  #caching, not the most self explanatory thing
   if(source in cache["sources"] and time() - cache["articles"][source]["time"] < 7200  ):
     return jsonify(cache["articles"][source]["data"])
 
   try:
       freshNews = []
-      r  = requests.get("https://newsapi.org/v1/articles?source="+source+"&sortBy=latest&apiKey="+os.environ.get('NEWSAPI_KEY'))
+      r  = requests.get("https://newsapi.org/v1/articles?source="+source+"&apiKey="+os.environ.get('NEWSAPI_KEY'))
       data = r.json()
       for article in data["articles"]:
         url = 'https://mercury.postlight.com/parser?url='+article["url"]
@@ -37,7 +37,7 @@ def news():
         r = requests.get(url,headers=headers)
         mercury = r.json()
         article["content"] = mercury["content"]
-        sleep(0.1)
+        sleep(0.05)
 
       cache["sources"].append(source)
       cache["articles"][source] = {
@@ -46,7 +46,7 @@ def news():
       }
 
       return jsonify(data["articles"])
-    
+
   except Exception as e:
       print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.')
       print(e)
