@@ -23,10 +23,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.2/fetch.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <script>
+      setTimeout(function(){
+        if(document.querySelectorAll('div').length == 1){
+          localStorage.clear()
+          location.reload()
+        }
+      }, 10000)
+    </script>
   </head>
   <body>
-    
+
     <div id="root">Loading</div>
-  
+
   </body>
 </html>

@@ -55,6 +55,7 @@ const Home =  ({ui,news, sources, load}) => {
           return(
             <CardLink href={ `/article/${index}`}>
               <div className="content">
+                <p class="url small">{article.url.split("/")[2]}</p>
                 <img
                   class="logo"
                   onError={imgError}
@@ -63,7 +64,7 @@ const Home =  ({ui,news, sources, load}) => {
                 <h3>{article.title}</h3>
                 {article.urlToImage ?
                   <img
-                  onError={e=>e.target.src = "/img/na.jpg"} 
+                  onError={e=>e.target.src = "/img/na.jpg"}
                   src={"https://api.rethumb.com/v1/square/300/"+article.urlToImage} />
                 :
                   <img src="/img/na.jpg" />
