@@ -1,10 +1,10 @@
+'use strict'
 /* express app as a webtask */
 
 const Express = require('express')
 const Webtask = require('webtask-tools')
 const admin = require('firebase-admin')
 const request = require('request')
-const serviceAccount = require("./fb.json")
 
 const app = Express()
 
@@ -14,7 +14,8 @@ app.use(require('body-parser').json())
 app.post('/', (req, res) => {
   const NEWSAPI_KEY = req.webtaskContext.data.NEWSAPI_KEY
   const MERCURY_KEY = req.webtaskContext.data.MERCURY_KEY
-  const NEWSCRAPER_KEY = req.webtaskContext.data.NEWSCRAPER_KEY
+  const SA = req.webtaskContext.data.SA
+  const serviceAccount = JSON.parse(SA)
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
