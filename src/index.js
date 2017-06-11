@@ -1,5 +1,6 @@
 require("babel-polyfill");
 import { render } from 'preact';
+import 'whatwg-fetch';
 import './index.sass';
 
 let elem, App;
@@ -12,8 +13,10 @@ init();
 
 if (process.env.NODE_ENV === 'production') {
 	// cache all assets if browser supports serviceworker
+  require('offline-plugin/runtime').install();
 	if ('serviceWorker' in navigator && location.protocol === 'https:') {
-		navigator.serviceWorker.register('/service-worker.js');
+		// navigator.serviceWorker.register('/service-worker.js');
+
 	}
 
 	// add Google Analytics

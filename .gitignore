@@ -1,4 +1,2 @@
-frontend-src/node_modules/
-.env
-
-__pycache__/app.cpython-36.pyc
+node_modules/
+fb.json

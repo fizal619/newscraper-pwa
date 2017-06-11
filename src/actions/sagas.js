@@ -19,7 +19,7 @@ export function* helloSaga() {
 export async function fetchSources(){
   console.log('in fetch sources');
   let returnData;
-  await fetch('https://newsapi.org/v1/sources?language=en&country=us').then(r=>r.json()).then(data=> returnData = data);
+  await fetch('https://newsapi.org/v1/sources?language=en').then(r=>r.json()).then(data=> returnData = data);
   console.log(returnData);
   return returnData.sources;
 }
@@ -27,7 +27,7 @@ export async function fetchSources(){
 export async function fetchNews(source){
   console.log('in fetch');
   let returnData;
-  await fetch('https://newscraper-pwa.herokuapp.com/news?s='+source).then(r=>r.json()).then(data=> returnData = data);
+  await fetch('https://newscraper-21f8a.firebaseio.com/news/'+source+'.json').then(r=>r.json()).then(data=> returnData = data);
   console.log(returnData);
   return returnData;
 }

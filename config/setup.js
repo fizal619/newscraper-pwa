@@ -1,7 +1,7 @@
 const { join } = require('path');
 const webpack = require('webpack');
 const ExtractText = require('extract-text-webpack-plugin');
-const SWPrecache = require('sw-precache-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 const Dashboard = require('webpack-dashboard/plugin');
 const Clean = require('clean-webpack-plugin');
 const Copy = require('copy-webpack-plugin');
@@ -36,12 +36,7 @@ if (isProd) {
 	plugins.push(
 		new webpack.LoaderOptionsPlugin({minimize: true, debug: false}),
 		new ExtractText('styles.[hash].css'),
-		new SWPrecache({
-			filename: 'service-worker.js',
-			dontCacheBustUrlsMatching: /./,
-			navigateFallback: 'index.html',
-			staticFileGlobsIgnorePatterns: [/\.map$/]
-		})
+    new OfflinePlugin()
 	);
 } else {
 	// dev only
