@@ -12,7 +12,7 @@
     "build": "rm -rf ../dist && cross-env NODE_ENV=production webpack --config config/webpack",
     "deploy-backend": "wt create backend.js --secret NEWSAPI_KEY=$NEWSAPI_KEY --secret MERCURY_KEY=$MERCURY_KEY --secret SA=\"$SA\"",
     "deploy": "npm run build && cd dist/ && cp index.html 200.html && surge -d https://newscraper.surge.sh -p . && rm -rf * ",
-    "start": "wt serve backend.js --secret NEWSAPI_KEY=$NEWSAPI_KEY --secret MERCURY_KEY=$MERCURY_KEY --secret SA=$SA",
+    "start": "wt serve backend.js --secret NEWSAPI_KEY=$NEWSAPI_KEY --secret MERCURY_KEY=$MERCURY_KEY --secret SA=\"$SA\"",
     "watch": "webpack-dashboard -- webpack-dev-server --config config/webpack"
   },
   "dependencies": {
