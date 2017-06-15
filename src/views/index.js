@@ -19,7 +19,7 @@ import reducers from '../reducers/index'
 import rootSaga from '../actions/sagas'
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
-  reducers, 
+  reducers,
   compose(
     applyMiddleware(sagaMiddleware),
     autoRehydrate()
@@ -32,8 +32,12 @@ persistStore(store, {
 })
 
 
+
 // track pages on route change
-const onChange = obj => window.ga && ga('send', 'pageview', obj.url);
+const onChange = obj => {
+  // window.ga && ga('send', 'pageview', obj.url)
+
+};
 
 export default (
   <Provider store={store}>

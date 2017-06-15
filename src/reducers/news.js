@@ -6,8 +6,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
   // console.log(action)
-  // console.log(state)
-  let sources
+  console.log(state.articles[action.id])
+  // let sources
 
   switch (action.type) {
     case 'LOADED':
@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
       }
 
     case 'ADD SOURCE':
-      sources = state.sources.concat([action.source])
+      let sources = state.sources.concat([action.source])
       console.log('added source', sources)
       return Object.assign({}, state, {
         sources
@@ -44,6 +44,21 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         remoteSources: action.remoteSources
       })
+
+    case 'READ':
+      let readArticles = state.articles.map((article, index)=>{
+        if(index === action.id){
+          article['read'] = true
+          return article
+        }else{
+          return article
+        }
+      })
+      return Object.assign({}, state, {
+        articles: readArticles
+      })
+
+
 
     default:
       console.log('DEFAULT NEWS');

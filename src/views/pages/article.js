@@ -8,14 +8,15 @@ const mapStateToProps = state =>({
 	article: state.news.articles
 })
 
-const Article = ({id, article}) => { // <---- (props)
+const Article = ({id, article, saveScroll, read}) => { // <---- (props)
 	// console.log(article)
 	// TODO: make this work with router
-	if(!article[id]) location='/' 
+	if(!article[id]) location='/'
+
 
 	//move the view up to deal with that bug
 	window.scrollTo(0,0)
-	
+
 	return (
 		<div className="page page__article">
 				<h1>{article[id].title}</h1>

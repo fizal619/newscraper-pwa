@@ -1,5 +1,6 @@
 const initialState = {
-  loading: false
+  loading: false,
+
 }
 
 export default (state = initialState, action) => {
@@ -11,13 +12,17 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         loading: true
       })
-    
+
     case 'NOT_LOADING':
       return Object.assign({},state,{
         loading: false
-      }) 
+      })
 
-    
+    case 'SCROLLY':
+      return Object.assign({},state,{
+        scroll: action.scroll
+      })
+
     default:
       return state
   }

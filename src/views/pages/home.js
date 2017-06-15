@@ -15,12 +15,13 @@ const mapDispatchToProps = dispatch =>({
   load: (sources)=> {
     console.log('map state')
     dispatch({type: 'LOAD', sources})
-  }
+  },
+  read: id=> dispatch({type: 'READ', id: id}),
 })
 
 
-const Home =  ({ui,news, sources, load}) => {
-  // console.log(ui,news)
+const Home =  ({ui,news, sources, load, saveScroll, read}) => {
+
   const imgError = e =>{
     e.target.style.display = "none"
   }
@@ -53,8 +54,8 @@ const Home =  ({ui,news, sources, load}) => {
           // if (article.content.length < 500) return null
 
           return(
-            <CardLink href={ `/article/${index}`}>
-              <div className="content">
+            <CardLink  href={ `/article/${index}`}>
+              <div onClick={()=>read(index)} className="content">
                 <p class="url small">{article.url.split("/")[2]}</p>
                 <img
                   class="logo"
@@ -70,6 +71,7 @@ const Home =  ({ui,news, sources, load}) => {
                   <img src="/img/na.jpg" />
                 }
                 <p>{article.description}</p>
+                <p className="read">{article['read'] ? '✅' : ''}</p>
                 <p className="small">{new Date(article.publishedAt).toDateString()}</p>
               </div>
 
