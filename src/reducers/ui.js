@@ -1,6 +1,6 @@
 const initialState = {
   loading: false,
-
+  scroll: 0
 }
 
 export default (state = initialState, action) => {
@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
         loading: false
       })
 
-    case 'SCROLLY':
+    case 'SAVESCROLL':
       return Object.assign({},state,{
         scroll: action.scroll
       })

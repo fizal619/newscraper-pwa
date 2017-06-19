@@ -17,10 +17,13 @@ const mapDispatchToProps = dispatch =>({
     dispatch({type: 'LOAD', sources})
   },
   read: id=> dispatch({type: 'READ', id: id}),
+  saveScroll: ()=> dispatch({type: 'SAVESCROLL', scroll: window.scrollY})
 })
 
 
 const Home =  ({ui,news, sources, load, saveScroll, read}) => {
+
+  setTimeout(()=>window.scrollTo(0,ui.scroll),75)
 
   const imgError = e =>{
     e.target.style.display = "none"
@@ -55,7 +58,7 @@ const Home =  ({ui,news, sources, load, saveScroll, read}) => {
 
           return(
             <CardLink  href={ `/article/${index}`}>
-              <div onClick={()=>read(index)} className="content">
+              <div onClick={()=>{read(index);saveScroll()}} className="content">
                 <p class="url small">{article.url.split("/")[2]}</p>
                 <img
                   class="logo"

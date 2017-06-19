@@ -5,8 +5,8 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  // console.log(action)
-  console.log(state.articles[action.id])
+  console.log(action)
+  // console.log(state.articles[action.id])
   // let sources
 
   switch (action.type) {
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         if (new Date(a.publishedAt) > new Date(b.publishedAt)) return -1
         return 0
       })
-      console.log('LOADED NEWS')
+      // console.log('LOADED NEWS')
       return Object.assign({}, state,{
         articles: newArticles
       })
@@ -28,14 +28,14 @@ export default (state = initialState, action) => {
 
     case 'ADD SOURCE':
       let sources = state.sources.concat([action.source])
-      console.log('added source', sources)
+      // console.log('added source', sources)
       return Object.assign({}, state, {
         sources
       })
 
     case 'REMOVE SOURCE':
       sources = state.sources.filter(source=>source!==action.source)
-      console.log('removed source', sources)
+      // console.log('removed source', sources)
       return Object.assign({}, state, {
         sources
       })
@@ -61,7 +61,7 @@ export default (state = initialState, action) => {
 
 
     default:
-      console.log('DEFAULT NEWS');
+      // console.log('DEFAULT NEWS');
       return state
   }
 }
