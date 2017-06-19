@@ -15,7 +15,7 @@ const Article = ({id, article, saveScroll, read}) => { // <---- (props)
 
 
 	//move the view up to deal with that bug
-	setTimeout(()=>window.scrollTo(0,0),75)
+	setTimeout(()=>window.scrollTo(0,0),50)
 
 	return (
 		<div className="page page__article">

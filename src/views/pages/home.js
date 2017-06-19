@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch =>({
 
 const Home =  ({ui,news, sources, load, saveScroll, read}) => {
 
-  setTimeout(()=>window.scrollTo(0,ui.scroll),75)
+  setTimeout(()=>window.scrollTo(0,ui.scroll),50)
 
   const imgError = e =>{
     e.target.style.display = "none"
