@@ -4,6 +4,7 @@ import Card from '../tags/card';
 import Button from '../tags/button';
 import CardLink from '../tags/card-link';
 import {connect} from 'react-redux'
+import timeago from 'timeago.js';
 
 const mapStateToProps = state =>({
   news: state.news.articles,
@@ -13,7 +14,7 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = dispatch =>({
   load: (sources)=> {
-    console.log('map state')
+    // console.log('map state')
     dispatch({type: 'LOAD', sources})
   },
   read: id=> dispatch({type: 'READ', id: id}),
@@ -44,9 +45,14 @@ const Home =  ({ui,news, sources, load, saveScroll, read}) => {
         {news.length == 0 ?
           <div>
             <h2>Hey! Welcome to my app! <br/></h2>
-            <p> <b>Newscraper</b> is a fairly simple app for reading news from some popular news sources offline.</p>
+            <p> <b>Newscraper</b> is an app for reading news from  popular news sources offline.</p>
             <p>You should add it to your homescreen for the best experience!</p>
-            <p><b>Hit the gear on the upper right to pick your favorite sources then come back here and hit refresh.</b></p>
+            <br/>
+            <center>
+              <h3>
+                <Link href="/settings">Pick your favorite sources!</Link>
+              </h3>
+            </center>
           </div>
           :
           <h2>Latest News <br/></h2>
@@ -54,7 +60,7 @@ const Home =  ({ui,news, sources, load, saveScroll, read}) => {
         {news.map((article,index)=>{
 
           //only return lengthy things, helps filter out weird stuff from hacker news
-          // if (article.content.length < 500) return null
+          if (article.content.length < 100) return null
 
           return(
             <CardLink  href={ `/article/${index}`}>
@@ -69,13 +75,15 @@ const Home =  ({ui,news, sources, load, saveScroll, read}) => {
                 {article.urlToImage ?
                   <img
                   onError={e=>e.target.src = "/img/na.jpg"}
-                  src={"https://api.rethumb.com/v1/square/300/"+article.urlToImage} />
+                  src={"//api.rethumb.com/v1/square/300/"+article.urlToImage} />
                 :
                   <img src="/img/na.jpg" />
                 }
                 <p>{article.description}</p>
                 <p className="read">{article['read'] ? '✅' : ''}</p>
-                <p className="small">{new Date(article.publishedAt).toDateString()}</p>
+                <p className="small">{
+                  timeago().format(new Date(article.publishedAt))
+                }</p>
               </div>
 
             </CardLink>

@@ -19,7 +19,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "firebase-admin": "^5.0.0",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "timeago.js": "^3.0.1"
   },
   "devDependencies": {
     "edge": "^7.10.1",

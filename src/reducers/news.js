@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  console.log(action)
+  // console.log(action)
   // console.log(state.articles[action.id])
   // let sources
 
