@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch =>({
 
 
 const Home =  ({ui,news, sources, load, saveScroll, read}) => {
-
+  console.log(sources)
   setTimeout(()=>window.scrollTo(0,ui.scroll),50)
 
   const imgError = e =>{
@@ -60,7 +60,7 @@ const Home =  ({ui,news, sources, load, saveScroll, read}) => {
         {news.map((article,index)=>{
 
           //only return lengthy things, helps filter out weird stuff from hacker news
-          if (article.content.length < 100) return null
+          if (article.content && article.content.length < 100) return null
 
           return(
             <CardLink  href={ `/article/${index}`}>

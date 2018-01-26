@@ -19,7 +19,7 @@ export function* helloSaga() {
 export async function fetchSources(){
   // console.log('in fetch sources');
   let returnData;
-  await fetch('https://newsapi.org/v1/sources?language=en').then(r=>r.json()).then(data=> returnData = data);
+  await fetch('https://newsapi.org/v1/sources?language=en&country=us').then(r=>r.json()).then(data=> returnData = data);
   // console.log(returnData);
   return returnData.sources;
 }
@@ -28,8 +28,9 @@ export async function fetchNews(source){
   // console.log('in fetch');
   let returnData;
   await fetch('https://newscraper-21f8a.firebaseio.com/news/'+source+'.json').then(r=>r.json()).then(data=> returnData = data);
-  // console.log(returnData);
-  return returnData;
+  let transformedArticles = [];
+  if (returnData) transformedArticles = returnData.map(d=>JSON.parse(d));
+  return transformedArticles;
 }
 
 export function* loadSources() {
@@ -58,7 +59,7 @@ export function* loadNews(action) {
     yield put({type: 'LOADED', articles});
     yield put({type: 'NOT_LOADING'});
   } catch(e){
-    // console.log(e);
+    console.log(e);
     yield put({type: 'NOT_LOADING'});
   }
 
