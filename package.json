@@ -10,7 +10,6 @@
   "author": "Fizal Sarif (http://github.com/fizal619) (http://fizal.me)",
   "scripts": {
     "build": "rm -rf ../dist && cross-env NODE_ENV=production webpack --config config/webpack",
-    "deploy-backend": "wt create backend.js --secret NEWSAPI_KEY=$NEWSAPI_KEY --secret MERCURY_KEY=$MERCURY_KEY --secret SA=\"$SA\"",
     "deploy": "npm run build && cd dist/ && cp index.html 200.html && surge -d https://newscraper.surge.sh -p . && rm -rf * ",
     "start": "wt serve backend.js --secret NEWSAPI_KEY=$NEWSAPI_KEY --secret MERCURY_KEY=$MERCURY_KEY --secret SA=\"$SA\"",
     "watch": "webpack-dashboard -- webpack-dev-server --config config/webpack"
@@ -18,12 +17,12 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "firebase-admin": "^5.0.0",
+    "firebase-admin": "^5.8.1",
+    "node-fetch": "^1.7.3",
     "request": "^2.81.0",
     "timeago.js": "^3.0.1"
   },
   "devDependencies": {
-    "edge": "^7.10.1",
     "autoprefixer": "^6.6.1",
     "babel": "^6.5.2",
     "babel-core": "^6.22.1",
@@ -37,6 +36,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^3.2.4",
     "css-loader": "^0.26.1",
+    "edge": "^7.10.1",
     "es6-promise": "^4.0.5",
     "extract-text-webpack-plugin": "beta",
     "html-webpack-plugin": "^2.25.0",
