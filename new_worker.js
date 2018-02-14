@@ -1,3 +1,5 @@
+// Ya need sum cawfee! If yous know what im sayin! Spoken like a tru New Yorka.
+
 'use strict'
 const admin = require('firebase-admin');
 const fetch = require('node-fetch');
@@ -25,7 +27,7 @@ const fetchHeadlines = source => new Promise(resolve => {
   .then(data=>resolve(data.articles));
 });
 
-const scrapeContent = article => new Promise(resolve => { 
+const scrapeContent = article => new Promise(resolve => {
   let options = {
     headers: {
       'x-api-key': MERCURY_KEY
@@ -44,7 +46,7 @@ const scrapeContent = article => new Promise(resolve => {
   })
 });
 
-//take advantage of the async await cycle to 
+//take advantage of the async await cycle to
 //avoid callback hell
 async function worker(){
   let sources = await fetchSources();

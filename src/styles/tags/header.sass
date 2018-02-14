@@ -4,13 +4,21 @@
 
 $header-height: 10 * $base-unit
 
+.home-button
+	left: 0
+	float: left
+.cog-button
+	right: 0
+	float: right
+
 .header
-	position: fixed
+	position: absolute
 	height: $header-height
 	width: 100%
 	padding: 0
-	left: 0
 	top: 0
+	left: 0
+	right: 0
 	background: $primary
 	@extend %shadow
 	z-index: 50
@@ -20,8 +28,8 @@ $header-height: 10 * $base-unit
 		transform: translateY(13px)
 
 	h1
-		float: left
-		margin: 0
+		// position: absolute
+		margin: 0 auto
 		padding: 0 $base-spacing
 		font-size: 24px
 		line-height: $header-height
@@ -29,10 +37,11 @@ $header-height: 10 * $base-unit
 		color: $white
 
 	nav
-		float: right
 		font-size: 100%
 
 		a
+			position: absolute
+			top: 0
 			display: inline-block
 			height: $header-height
 			line-height: $header-height

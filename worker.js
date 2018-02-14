@@ -1,3 +1,5 @@
+// Worker ants are proud of this file.
+
 'use strict'
 const admin = require('firebase-admin')
 const request = require('request')
@@ -30,16 +32,16 @@ request.get(`https://newsapi.org/v2/sources?country=us&language=en&apiKey=${NEWS
       }
       request.get(options, (err, response, scraped) => {
         article['content'] = JSON.parse(scraped)['content']
-        
+
         let tmpArticle = JSON.stringify(article);
         if (final[article.source.id]) {
           final[article.source.id].push(tmpArticle);
         } else {
           final[article.source.id] = [tmpArticle];
         }
-        
+
         final.length++;
-        
+
         if (final.length === data.articles.length) {
           database.ref('/news').set(final)
           .then(snap=>console.log('set!')).catch(r=>console.log(r));
