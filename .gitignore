@@ -3,3 +3,4 @@ node_modules/
 fb.json
 sa.json
 secrets.json
+package-lock.json
