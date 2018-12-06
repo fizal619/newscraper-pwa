@@ -6,11 +6,10 @@ Progressive web app for reading fresh news offline in the **subway** from variou
 
 ## Tech Stack
 
-- ~~[Webtask](https://webtask.io)~~
+- [Webtask](https://webtask.io)
 - [Preact-JS Starter](https://github.com/lukeed/preact-starter) - For this awesome offline ready boilerplate. [Preact](https://preactjs.com/) Isn't that different from React, it only weighs 3KB!
 - [The News Api](http://newsapi.org) - Awesome news aggregation api. I'll definitely expand this app to take full advantage of the many sources here.
 - [Mercury Api](https://mercury.postlight.com/web-parser/) - Amazing time saver, it goes and builds a _readable_ version of whatever article you supply it. _Think pocket/instapaper._
-- A cron job on my personal VPS.
 
 ## Running/Deploying
 

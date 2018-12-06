@@ -44,7 +44,10 @@ request.get(`https://newsapi.org/v2/sources?country=us&language=en&apiKey=${NEWS
 
         if (final.length === data.articles.length) {
           database.ref('/news').set(final)
-          .then(snap=>console.log('set!')).catch(r=>console.log(r));
+          .then(snap=>{
+            console.log('set!');
+            process.exit();
+          }).catch(r=>console.log(r));
           console.log(final.length, "ITEMS")
         }
       })
